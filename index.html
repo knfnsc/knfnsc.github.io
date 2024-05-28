@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jornada pela Equidade - Ajuste de Marcadores</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        h1 {
+            color: #007bff;
+        }
+        .container {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .atributo {
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .valor {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #007bff;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .calculadora {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .calcular {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #28a745;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .calcular:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jornada pela Equidade - Ajuste de Marcadores</h1>
+    <div class="container">
+        <div class="atributo">
+            <h2 style="color: #007bff;">Conhecimento</h2>
+            <div class="valor" id="conhecimento">0</div>
+            <button onclick="aumentar('conhecimento')">+</button>
+            <button onclick="diminuir('conhecimento')">-</button>
+            <div class="calculadora">
+                <input type="number" id="inputConhecimento" placeholder="Valor">
+                <button class="calcular" onclick="calcular('conhecimento')">Calcular</button>
+            </div>
+        </div>
+        <div class="atributo">
+            <h2 style="color: #ffc107;">Experiência</h2>
+            <div class="valor" id="experiencia">0</div>
+            <button onclick="aumentar('experiencia')">+</button>
+            <button onclick="diminuir('experiencia')">-</button>
+            <div class="calculadora">
+                <input type="number" id="inputExperiencia" placeholder="Valor">
+                <button class="calcular" onclick="calcular('experiencia')">Calcular</button>
+            </div>
+        </div>
+        <div class="atributo">
+            <h2 style="color: #dc3545;">Felicidade</h2>
+            <div class="valor" id="felicidade">0</div>
+            <button onclick="aumentar('felicidade')">+</button>
+            <button onclick="diminuir('felicidade')">-</button>
+            <div class="calculadora">
+                <input type="number" id="inputFelicidade" placeholder="Valor">
+                <button class="calcular" onclick="calcular('felicidade')">Calcular</button>
+            </div>
+        </div>
+        <div class="atributo">
+            <h2 style="color: #6c757d;">Dinheiro</h2>
+            <div class="valor" id="dinheiro">0</div>
+            <button onclick="aumentar('dinheiro')">+</button>
+            <button onclick="diminuir('dinheiro')">-</button>
+            <div class="calculadora">
+                <input type="number" id="inputDinheiro" placeholder="Valor">
+                <button class="calcular" onclick="calcular('dinheiro')">Calcular</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function aumentar(atributo) {
+            var valorAtual = parseInt(document.getElementById(atributo).innerText);
+            document.getElementById(atributo).innerText = valorAtual + 1;
+        }
+
+        function diminuir(atributo) {
+            var valorAtual = parseInt(document.getElementById(atributo).innerText);
+            if (valorAtual > 0) {
+                document.getElementById(atributo).innerText = valorAtual - 1;
+            }
+        }
+
+        function calcular(atributo) {
+            var valorInput = parseInt(document.getElementById("input" + atributo.charAt(0).toUpperCase() + atributo.slice(1)).value);
+            if (!isNaN(valorInput)) {
+                document.getElementById(atributo).innerText = valorInput;
+            }
+        }
+    </script>
+</body>
+</html>
