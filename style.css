@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Caprasimo&family=Comic+Neue:ital,wght@1,700&family=Outfit:wght@400;700&display=swap");
+
+:root {
+    --black: #000000;
+    --white: #f8f8f8;
+    --cyan: #06999a;
+    --pink: #9a0699;
+    --yellow: #999a06;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+    font-family: "Outfit", sans-serif;
+    color: var(--white);
+    background-color: #16161d;
+}
+
+i {
+    font-family: "Comic Neue", monospace;
+    font-style: italic;
+}
+
+#face-page {
+    height: 100vh;
+    background-color: #16161d;
+    padding: 0 15%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h1 {
+    font-family: "Caprasimo", serif;
+    font-weight: bold;
+    font-size: 4rem;
+    
+    text-shadow: 
+        1px 1px 2px var(--cyan),
+        0 0 10px var(--pink),
+        0 0 5px var(--yellow);
+}
+
+section {
+  margin: 2rem 15%;
+  padding: 0.75rem 1rem;
+ 
+  border: 2px solid var(--white);
+  border-radius: 20px;
+}
+
+h2 {
+  font-size: 1.75rem;
+}
+
+p {
+  font-size: 1.5rem;
+
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+footer {
+  padding: 2rem 15%;
+
+  text-align: center;
+  text-wrap: balance;
+
+  font-size: 1.5rem;
+
+  background-color: var(--black);
+}
