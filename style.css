@@ -23,19 +23,19 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 1000%;
-  height: 1000%;
-  animation: move-dots 30s linear infinite;
+  width: 200%;
+  height: 200%;
+  animation: move-dots 15s linear infinite;
   z-index: -1;
 }
 
 @keyframes move-dots {
   0% {
-    transform: translate(-10%, -10%);
+    transform: translate(-11%, -11%);
   }
 
   100% {
-    transform: translate(10%, 10%);
+    transform: translate(1%, 1%);
   }
 }
 
@@ -85,7 +85,10 @@ p {
   font-size: 1.5rem;
 
   text-align: justify;
-  text-justify: inter-word;
+}
+
+a {
+  color: inherit;
 }
 
 footer {
