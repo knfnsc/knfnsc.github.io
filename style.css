@@ -69,7 +69,7 @@ section {
   margin: 2rem 15%;
   padding: 1.5rem;
 
-  border: 3px solid var(--white);
+  border: 4px solid var(--white);
   border-radius: 20px;
 
   box-shadow: 0 0 10px var(--black);
