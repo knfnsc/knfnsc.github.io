@@ -31,7 +31,7 @@ body {
 
 @keyframes move-dots {
   0% {
-    transform: translate(-11%, -11%);
+    transform: translate(-12%, -12%);
   }
 
   100% {
