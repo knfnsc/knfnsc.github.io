@@ -1,41 +1,137 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/x-icon" href="favicon.ico" />
+        <title>Oi.</title>
+        <script type="importmap">
+            {
+                "imports": {
+                    "three": "https://cdn.jsdelivr.net/npm/three@0.167.1/build/three.module.js",
+                    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.167.1/examples/jsm/"
+                }
+            }
+        </script>
+    </head>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <title>Oi.</title>
-</head>
+        #app {
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+    <body>
+        <div id="app"></div>
+    </body>
+    <script type="module">
+        import * as THREE from "three";
 
-<body>
-  <main>
-    <img id="grid-background">
-    <div id="face-page">
-      <h1>Oi, o prazer é todo seu.</h1>
-    </div>
-    <section id="about-me" style="background-color: var(--cyan);">
-      <h2>Sobre mim</h2>
-      <p>
-        Aficionado por Python, amante de Rust e Go, aprendendo (pelo menos tentando) a amar JavaScript.
-      </p>
-    </section>
-    <section id="projects" style="background-color: var(--pink);">
-      <h2>Projetos</h2>
-      <p>
-        <a href="https://github.com/knfnsc/calamo">Calamo</a> — solução PDV simplissíma.
-      </p>
-    </section>
-    <section id="contact" style="background-color: var(--yellow);">
-      <h2>Fale comigo</h2>
-      <b>Email:</b> kn.fnsc@proton.me
-    </section>
-  </main>
-  <footer>
-    <b>© Todos os direitos reservados, eu acho.</b>
-  </footer>
-</body>
+        const container = document.querySelector("#app");
+        const width = container.clientWidth;
+        const height = container.clientHeight;
 
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(
+            75,
+            width / height,
+            0.1,
+            1000,
+        );
+        camera.position.z = 3;
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(width, height);
+
+        container.appendChild(renderer.domElement);
+
+        function createTextTexture(text, backgroundColor, textColor) {
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d");
+
+            canvas.width = 512;
+            canvas.height = 512;
+
+            context.fillStyle = backgroundColor;
+            context.fillRect(0, 0, canvas.width, canvas.height);
+
+            context.fillStyle = textColor;
+            context.font = "bold 120px Arial";
+            context.textAlign = "center";
+            context.textBaseline = "middle";
+
+            const lines = text.split("\n");
+            const lineHeight = 120;
+            const startY =
+                (canvas.height - (lines.length - 1) * lineHeight) / 2;
+
+            lines.forEach((line, index) => {
+                context.fillText(
+                    line,
+                    canvas.width / 2,
+                    startY + index * lineHeight,
+                );
+            });
+
+            const texture = new THREE.CanvasTexture(canvas);
+            texture.needsUpdate = true;
+
+            return texture;
+        }
+
+        const hollow_purple = "rgba(106, 9, 153, 0.8)";
+        const textures = [
+            createTextTexture("knfnsc", hollow_purple, "white"),
+            createTextTexture("melhor", hollow_purple, "white"),
+            createTextTexture("firme", hollow_purple, "white"),
+            createTextTexture("10/10", hollow_purple, "white"),
+            createTextTexture("knfnsc", hollow_purple, "white"),
+        ];
+
+        const materials = textures.map(
+            (texture) =>
+                new THREE.MeshStandardMaterial({
+                    map: texture,
+                    roughness: 0.3,
+                    metalness: 0.2,
+                }),
+        );
+
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        const cube = new THREE.Mesh(geometry, materials);
+        scene.add(cube);
+
+        const light = new THREE.DirectionalLight(0xffffff, 1);
+        light.position.set(2, 2, 2);
+        scene.add(light);
+
+        const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+        scene.add(ambientLight);
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        window.addEventListener("resize", () => {
+            const newWidth = container.clientWidth;
+            const newHeight = container.clientHeight;
+
+            camera.aspect = newWidth / newHeight;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize(newWidth, newHeight);
+        });
+    </script>
 </html>
