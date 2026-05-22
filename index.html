@@ -85,16 +85,26 @@
         }
 
         const hollow_purple = "rgba(106, 9, 153, 0.8)";
-        const textures = createTextTexture("knfnsc", hollow_purple, "white");
+        const textures = [
+            createTextTexture("knfnsc", hollow_purple, "white"),
+            createTextTexture("knfnsc", hollow_purple, "white"),
+            createTextTexture("knfnsc", hollow_purple, "white"),
+            createTextTexture("knfnsc", hollow_purple, "white"),
+            createTextTexture("knfnsc", hollow_purple, "white"),
+            createTextTexture("knfnsc", hollow_purple, "white"),
+        ];
 
-        const material = new THREE.MeshStandardMaterial({
-            map: texture,
-            roughness: 0.3,
-            metalness: 0.2,
-        });
+        const materials = textures.map(
+            (texture) =>
+                new THREE.MeshStandardMaterial({
+                    map: texture,
+                    roughness: 0.3,
+                    metalness: 0.2,
+                }),
+        );
 
         const geometry = new THREE.BoxGeometry(1, 1, 1);
-        const cube = new THREE.Mesh(geometry, material);
+        const cube = new THREE.Mesh(geometry, materials);
         scene.add(cube);
 
         const light = new THREE.DirectionalLight(0xffffff, 1);
